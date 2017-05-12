@@ -39,6 +39,18 @@ int gcd(int a, int b) {
 
 void serpinskii(GWindow &w, int leftX, int leftY, int size, int order) {
     // your code here
+    if (order == 1){
+
+        w.drawLine(leftX, leftY, leftX + size, leftY);
+        w.drawLine(leftX + size, leftY, leftX + size/2, leftY + ((sqrt(3)/2) * size));
+        w.drawLine(leftX + size/2, leftY + ((sqrt(3)/2) * size), leftX, leftY);
+
+    } else {
+
+        serpinskii(w, leftX, leftY, size / 2, order - 1);
+        serpinskii(w, leftX + size / 2, leftY, size / 2, order - 1);
+        serpinskii(w, leftX + size / 4, leftY + sqrt(3) * size/4, size / 2, order - 1) ;
+    }
     cout << "[recursion serpinskii called]" << endl;
 }
 
