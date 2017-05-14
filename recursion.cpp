@@ -55,9 +55,30 @@ void serpinskii(GWindow &w, int leftX, int leftY, int size, int order) {
 }
 
 int floodFill(GBufferedImage& image, int x, int y, int newColor) {
-    // your code here
-    cout << "[recursion flood fill called]" << endl;
-    return 0;
+
+
+    int jetzt = image.getRGB(x,y);
+    int count = 0;
+
+    if (jetzt == newColor || !image.inBounds(x,y)){
+        return 0;
+
+    } else{
+        image.setRGB(x, y, newColor);
+        count += 1;
+        if (image.getRGB(x + 1, y) == jetzt){
+
+            count += floodFill(image, x + 1, y, newColor);
+        } if (image.getRGB(x - 1, y) == jetzt){
+            count += floodFill(image, x - 1, y, newColor);
+        } if (image.getRGB(x, y - 1) == jetzt){
+            count += floodFill(image, x, y - 1, newColor);
+        } if (image.getRGB(x, y + 1) == jetzt){
+            count += floodFill(image, x, y + 1, newColor);
+        }
+    }
+   //cout << "[recursion flood fill called]" << endl;
+    return count;
 }
 
 void personalCurriculum(Map<string, Vector<string>> & prereqMap,string goal) {
